@@ -51,5 +51,5 @@ verbose = 3;
 
 %% 7. Run the main script with defined parameters
 
-[R, ons_secs] = main_create_RETROICOR_regressors(files, ...
+[R, ons_secs] = physio_main_create_regressors(files, ...
     thresh, sqpar, order, verbose);
