@@ -65,13 +65,14 @@ model.output_multiple_regressors = 'multiple_regressors.mat';
 
 
 %% 6. Output Figures to be generated
+
+verbose.level = 3;
 % 0 = none; 
 % 1 = main plots (default); 
 % 2 = debugging plots: for missed slice/volume events, missed heartbeats, 1D time series of created regressors
 % 3 = all plots, incl. cardiac/respiratory phase estimation,
 %     slice-to-volume assignment
-
-verbose = 3;
+verbose.fig_output_file = 'PhysIO_output.ps';
 
 %% 7. Run the main script with defined parameters
 
