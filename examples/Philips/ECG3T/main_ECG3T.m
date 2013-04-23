@@ -3,22 +3,30 @@ pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
     '../../../code');
 
 addpath(genpath(pathRETROICORcode));
-clear files sqpar thresh order verbose
+
+physio      = physio_new();
+log_files   = physio.log_files;
+thresh      = physio.thresh;
+sqpar       = physio.sqpar;
+model       = physio.model;
+verbose     = physio.verbose;
 
 %% 1. Define Input Files
 
-files.vendor                = 'Philips';
-files.log_cardiac           = 'SCANPHYSLOG.log';      
-files.log_respiration       = 'SCANPHYSLOG.log';      
-files.input_other_multiple_regressors = 'rp_fMRI.txt'; % either txt-file or mat-file with variable R
-files.output_multiple_regressors = 'multiple_regressors.mat';
+log_files.vendor            = 'Philips';
+log_files.cardiac           = 'SCANPHYSLOG.log';      
+log_files.respiration       = 'SCANPHYSLOG.log';      
 
 
 %% 2. Define Nominal Sequence Parameter (Scan Timing)
 
 % 2.1. Counting scans and dummy volumes from end of run, i.e. logfile
-sqpar = struct('Nslices', 37, 'NslicesPerBeat', 37, 'TR', 2.50, ...
-    'Ndummies', 3, 'Nscans', 495, 'onset_slice', 19);
+sqpar.Nslices           = 37;
+sqpar.NslicesPerBeat    = 37;
+sqpar.TR                = 2.50;
+sqpar.Ndummies          = 3;
+sqpar.Nscans            = 495;
+sqpar.onset_slice       = 19;
 
 % 2.2. Counting scans and dummy volumes from beginning of run, i.e. logfile,
 %      includes counting of preparation gradients        
@@ -27,8 +35,6 @@ sqpar = struct('Nslices', 37, 'NslicesPerBeat', 37, 'TR', 2.50, ...
 
 
 %% 3. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
-thresh = struct('scan_timing', [], 'cardiac', []);
-
 % 3.1. Determine volume start solely by marking every Nslices-th scan slice
 % event as volume event
 thresh.scan_timing = struct('zero', 1700, 'slice', 1800, 'vol', [], ...
@@ -52,7 +58,10 @@ thresh.cardiac.modality = 'ECG';
 %% 5. Order of RETROICOR-expansions for cardiac, respiratory and
 %% interaction terms. Option to orthogonalise regressors
 
-order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
+model.type = 'RETROICOR';
+model.order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
+model.input_other_multiple_regressors = 'rp_fMRI.txt'; % either txt-file or mat-file with variable R
+model.output_multiple_regressors = 'multiple_regressors.mat';
 
 
 %% 6. Output Figures to be generated
@@ -66,5 +75,13 @@ verbose = 3;
 
 %% 7. Run the main script with defined parameters
 
-[R, ons_secs] = physio_main_create_regressors(files, ...
-    thresh, sqpar, order, verbose);
+physio.log_files    = log_files;
+physio.thresh       = thresh;
+physio.sqpar        = sqpar;
+physio.model        = model;
+physio.verbose      = verbose;
+
+[physio_out, R, ons_secs] = physio_main_create_regressors(physio);
+
+%[R, ons_secs] = physio_main_create_regressors(files, ...
+%    thresh, sqpar, order, verbose);
