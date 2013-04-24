@@ -61,7 +61,7 @@ thresh.cardiac.modality = 'ECG';
 model.type = 'RETROICOR';
 model.order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
 model.input_other_multiple_regressors = 'rp_fMRI.txt'; % either txt-file or mat-file with variable R
-model.output_multiple_regressors = 'multiple_regressors.mat';
+model.output_multiple_regressors = 'multiple_regressors.txt';
 
 
 %% 6. Output Figures to be generated
