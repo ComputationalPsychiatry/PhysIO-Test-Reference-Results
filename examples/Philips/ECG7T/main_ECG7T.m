@@ -3,27 +3,42 @@ pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
     '../../../code');
 
 addpath(genpath(pathRETROICORcode));
-clear files sqpar thresh order verbose
+
+physio      = physio_new();
+log_files   = physio.log_files;
+thresh      = physio.thresh;
+sqpar       = physio.sqpar;
+model       = physio.model;
+verbose     = physio.verbose;
 
 %% 1. Define Input Files
 
-files.vendor                = 'Philips';
-files.log_cardiac           = 'SCANPHYSLOG.log';      
-files.log_respiration       = 'SCANPHYSLOG.log';      
-files.input_other_multiple_regressors = 'rp_fMRI.txt'; % either txt-file or mat-file with variable R
-files.output_multiple_regressors = 'multiple_regressors_2.mat';
+log_files.vendor            = 'Philips';
+log_files.cardiac           = 'SCANPHYSLOG.log';      
+log_files.respiration       = 'SCANPHYSLOG.log';      
 
 
 %% 2. Define Nominal Sequence Parameter (Scan Timing)
 
-sqpar = struct('Nslices', 36, 'NslicesPerBeat', 36, 'TR', 2.00, ...
-    'Ndummies', 3, 'Nscans', 230, 'onset_slice', 18);
+% 2.1. Counting scans and dummy volumes from end of run, i.e. logfile
+sqpar.Nslices           = 36;
+sqpar.NslicesPerBeat    = 36;
+sqpar.TR                = 2.00;
+sqpar.Ndummies          = 3;
+sqpar.Nscans            = 230;
+sqpar.onset_slice       = 18;
+
+% 2.2. Counting scans and dummy volumes from beginning of run, i.e. logfile,
+%      includes counting of preparation gradients        
+% (Uncomment the following line to execute) 
+% sqpar.Nprep = 3;
 
 
 %% 3. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
-thresh = struct('scan_timing', [], 'cardiac', []);
-thresh.scan_timing = struct('zero', 1500, 'slice', 2200, 'vol', 2200, ...
-   'vol_spacing', 0.1, 'grad_direction', 'y');
+thresh.scan_timing = struct('zero', 1500, 'slice', 2200, 'vol', [], ...
+ 'grad_direction', 'y');
+thresh.scan_timing.vol = 3000;
+thresh.scan_timing.vol_spacing = 100e-3; % in seconds
 
 
 %% 4. Define which Cardiac Data Shall be Used
@@ -33,27 +48,40 @@ thresh.cardiac.modality = 'ECG'; % 'ECG' or 'OXY' (for pulse oximetry)
 
 %% 4.2. Using ECG time curve to detect heartbeat events, via a chosen or
 %% saved reference R-peak
-thresh.cardiac.min = 0.5;
-thresh.cardiac.kRpeakfile = 'SCANPHYSLOG_ECG_kRpeakfile.mat'; % used to save reference peak or load it from there, if manual_peak_select == true
-thresh.cardiac.manual_peak_select = false; % true or false. If true, a input window occurs where a typical maximum (R-peak or oximetry peak) shall be selected by mouse-clicks
+thresh.cardiac.initial_cpulse_select.min = 0.5;
+thresh.cardiac.initial_cpulse_select.file = 'initial_cpulse.mat'; % used to save reference peak or load it from there, if manual_peak_select == true
+thresh.cardiac.initial_cpulse_select.method = 'load'; % 'load_from_logfile', 'manual' or 'load' (from previous manual run)
 
 
 %% 5. Order of RETROICOR-expansions for cardiac, respiratory and
 %% interaction terms. Option to orthogonalise regressors
 
-order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
+model.type = 'RETROICOR';
+model.order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
+model.input_other_multiple_regressors = 'rp_fMRI.txt'; % either txt-file or mat-file with variable R
+model.output_multiple_regressors = 'multiple_regressors.txt';
 
 
 %% 6. Output Figures to be generated
+
+verbose.level = 3;
 % 0 = none; 
 % 1 = main plots (default); 
 % 2 = debugging plots: for missed slice/volume events, missed heartbeats, 1D time series of created regressors
 % 3 = all plots, incl. cardiac/respiratory phase estimation,
 %     slice-to-volume assignment
+verbose.fig_output_file = 'PhysIO_output.ps';
 
-verbose = 3;
 
 %% 7. Run the main script with defined parameters
 
-[R, ons_secs] = physio_main_create_regressors(files, ...
-    thresh, sqpar, order, verbose);
+physio.log_files    = log_files;
+physio.thresh       = thresh;
+physio.sqpar        = sqpar;
+physio.model        = model;
+physio.verbose      = verbose;
+
+physio = physio_new('manual_peak_select', physio);
+physio.thresh.cardiac.posthoc_cpulse_select.method = 'load';
+
+[physio_out, R, ons_secs] = physio_main_create_regressors(physio);
