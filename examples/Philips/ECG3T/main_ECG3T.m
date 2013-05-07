@@ -73,7 +73,7 @@ model.output_multiple_regressors = 'multiple_regressors.txt';
 %% 6. Output Figures to be generated
 
 verbose.level           = 2; % 0 = none; 1 = main plots (default);  2 = debugging plots, for setting up new study; 3 = all plots
-verbose.fig_output_file = 'PhysIO_output.ps';
+verbose.fig_output_file = 'PhysIO_output_level2.tiff';
 
 
 %% 7. Run the main script with defined parameters
