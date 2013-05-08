@@ -5,12 +5,12 @@ pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
 
 addpath(genpath(pathRETROICORcode));
 
-physio      = physio_new();
-log_files   = physio.log_files;
-thresh      = physio.thresh;
-sqpar       = physio.sqpar;
-model       = physio.model;
-verbose     = physio.verbose;
+physio      = physio_new();         % create structure
+log_files   = physio.log_files;     % 1a) Read logfiles
+sqpar       = physio.sqpar;         % 1b) Sequence timing
+thresh      = physio.thresh;        % 2) Preprocess phys & align scan-timing
+model       = physio.model;         % 3)/4) Model physiological time series
+verbose     = physio.verbose;       % Auxiliary: Output
 
 
 %% 1. Define Input Files
