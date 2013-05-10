@@ -1,3 +1,20 @@
+% Script that executes pulse oximetry (PPU) 3T Philips logfile. Just press play (F5)
+%
+% 
+% Note: 
+% - This is the input script to the PhysIO toolbox. Only this file has to be adapted for your study.
+% - For documentation of any of the defined substructures here, please
+% see also physio_new.m or the Manual_PhysIO-file.
+%
+% Copyright (C) 2013, Institute for Biomedical Engineering, ETH/Uni Zurich.
+%
+% This file is part of the PhysIO toolbox, which is released under the terms of the GNU General Public
+% Licence (GPL), version 3. You can redistribute it and/or modify it under the terms of the GPL
+% (either version 3 or, at your option, any later version). For further details, see the file
+% COPYING or <http://www.gnu.org/licenses/>.
+%
+% $Id$
+%
 %% 0. Put code directory into path; for some options, SPM should also be in the path
 pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
     '../../../code');
