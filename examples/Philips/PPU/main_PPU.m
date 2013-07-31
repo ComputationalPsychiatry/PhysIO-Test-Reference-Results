@@ -105,3 +105,13 @@ physio.verbose      = verbose;
 
 % create a heart-rate variability regressor using the cardiac response
 % function
+[convHRV, hr] = physio_create_hrv_regressor(physio_out.ons_secs, physio_out.sqpar);
+
+% compute breathing "pulses" (occurence times "rpulse" of max inhalation
+% times)
+thresh_cardiac = [];
+thresh_cardiac.min = .1; 
+ons_secs = physio_out.ons_secs;
+[ons_secs.rpulse, verbose] = physio_get_cardiac_pulses(ons_secs.t, ons_secs.r, ...
+thresh_cardiac,'OXY', verbose);
+physio_out.ons_secs = ons_secs;
