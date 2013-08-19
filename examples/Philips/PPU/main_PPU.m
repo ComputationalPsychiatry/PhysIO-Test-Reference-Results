@@ -4,7 +4,7 @@
 % Note: 
 % - This is the input script to the PhysIO toolbox. Only this file has to be adapted for your study.
 % - For documentation of any of the defined substructures here, please
-% see also physio_new.m or the Manual_PhysIO-file.
+% see also tapas_physio_new.m or the Manual_PhysIO-file.
 %
 % Copyright (C) 2013, Institute for Biomedical Engineering, ETH/Uni Zurich.
 %
@@ -21,7 +21,7 @@ pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
 
 addpath(genpath(pathRETROICORcode));
 
-physio      = physio_new();
+physio      = tapas_physio_new();
 log_files   = physio.log_files;
 thresh      = physio.thresh;
 sqpar       = physio.sqpar;
@@ -98,20 +98,20 @@ physio.sqpar        = sqpar;
 physio.model        = model;
 physio.verbose      = verbose;
 
-% physio = physio_new('manual_peak_select', physio);
+% physio = tapas_physio_new('manual_peak_select', physio);
 % physio.thresh.cardiac.posthoc_cpulse_select.method = 'load';
 
-[physio_out, R, ons_secs] = physio_main_create_regressors(physio);
+[physio_out, R, ons_secs] = tapas_physio_main_create_regressors(physio);
 
 % create a heart-rate variability regressor using the cardiac response
 % function
-[convHRV, hr] = physio_create_hrv_regressor(physio_out.ons_secs, physio_out.sqpar);
+[convHRV, hr] = tapas_physio_create_hrv_regressor(physio_out.ons_secs, physio_out.sqpar);
 
 % compute breathing "pulses" (occurence times "rpulse" of max inhalation
 % times)
 thresh_cardiac = [];
 thresh_cardiac.min = .1; 
 ons_secs = physio_out.ons_secs;
-[ons_secs.rpulse, verbose] = physio_get_cardiac_pulses(ons_secs.t, ons_secs.r, ...
+[ons_secs.rpulse, verbose] = tapas_physio_get_cardiac_pulses(ons_secs.t, ons_secs.r, ...
 thresh_cardiac,'OXY', verbose);
 physio_out.ons_secs = ons_secs;

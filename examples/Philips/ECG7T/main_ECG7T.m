@@ -4,7 +4,7 @@
 % Note: 
 % - This is the input script to the PhysIO toolbox. Only this file has to be adapted for your study.
 % - For documentation of any of the defined substructures here, please
-% see also physio_new.m or the Manual_PhysIO-file.
+% see also tapas_physio_new.m or the Manual_PhysIO-file.
 %
 % Copyright (C) 2013, Institute for Biomedical Engineering, ETH/Uni Zurich.
 %
@@ -22,7 +22,7 @@ pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
 
 addpath(genpath(pathRETROICORcode));
 
-physio      = physio_new();
+physio      = tapas_physio_new();
 log_files   = physio.log_files;
 thresh      = physio.thresh;
 sqpar       = physio.sqpar;
@@ -99,7 +99,7 @@ physio.sqpar        = sqpar;
 physio.model        = model;
 physio.verbose      = verbose;
 
-physio = physio_new('manual_peak_select', physio);          % loads pre-specified parameter set for manual post-hoc peak selection
+physio = tapas_physio_new('manual_peak_select', physio);          % loads pre-specified parameter set for manual post-hoc peak selection
 physio.thresh.cardiac.posthoc_cpulse_select.method = 'load'; % 'off', 'manual' or 'load'
 
-[physio_out, R, ons_secs] = physio_main_create_regressors(physio);
+[physio_out, R, ons_secs] = tapas_physio_main_create_regressors(physio);
