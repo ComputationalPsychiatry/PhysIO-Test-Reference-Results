@@ -73,7 +73,7 @@ thresh.cardiac.initial_cpulse_select.method = 'manual'; % 'load_from_logfile', '
 %% 5. Order of RETROICOR-expansions for cardiac, respiratory and
 %% interaction terms. Option to orthogonalise regressors
 
-model.type = 'RETROICOR_HRV';
+model.type = 'RETROICOR_HRV_RVT';
 model.order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
 model.input_other_multiple_regressors = ''; % either txt-file or mat-file with variable R
 model.output_multiple_regressors = 'multiple_regressors.txt';
@@ -102,12 +102,3 @@ physio.verbose      = verbose;
 % physio.thresh.cardiac.posthoc_cpulse_select.method = 'load';
 
 [physio_out, R, ons_secs] = tapas_physio_main_create_regressors(physio);
-
-% compute breathing "pulses" (occurence times "rpulse" of max inhalation
-% times)
-thresh_cardiac = [];
-thresh_cardiac.min = .1; 
-ons_secs = physio_out.ons_secs;
-[ons_secs.rpulse, verbose] = tapas_physio_get_cardiac_pulses(ons_secs.t, ons_secs.fr, ...
-thresh_cardiac,'OXY', verbose);
-physio_out.ons_secs = ons_secs;
