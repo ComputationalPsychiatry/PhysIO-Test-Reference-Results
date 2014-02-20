@@ -55,8 +55,8 @@ sqpar.onset_slice       = 18;
 %% 3. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
 thresh.scan_timing = struct('zero', 1500, 'slice', 2200, 'vol', [], ...
  'grad_direction', 'y');
-thresh.scan_timing.vol = 3000;
-thresh.scan_timing.vol_spacing = []; % in seconds
+thresh.scan_timing.vol = [];
+thresh.scan_timing.vol_spacing = 150e-3; % in seconds
 
 
 %% 4. Define which Cardiac Data Shall be Used
