@@ -56,7 +56,7 @@ sqpar.onset_slice       = 18;
 thresh.scan_timing = struct('zero', 1500, 'slice', 2200, 'vol', [], ...
  'grad_direction', 'y');
 thresh.scan_timing.vol = [];
-thresh.scan_timing.vol_spacing = 150e-3; % in seconds
+thresh.scan_timing.vol_spacing = 90e-3; % in seconds
 
 
 %% 4. Define which Cardiac Data Shall be Used
@@ -66,9 +66,9 @@ thresh.cardiac.modality = 'ECG'; % 'ECG' or 'OXY' (for pulse oximetry)
 
 %% 4.2. Using ECG time curve to detect heartbeat events, via a chosen or
 %% saved reference R-peak
-thresh.cardiac.initial_cpulse_select.min = 0.5;
-thresh.cardiac.initial_cpulse_select.file = 'initial_cpulse.mat'; % used to save reference peak or load it from there, if manual_peak_select == true
-thresh.cardiac.initial_cpulse_select.method = 'load'; % 'load_from_logfile', 'manual' or 'load' (from previous manual run)
+thresh.cardiac.initial_cpulse_select.method = 'auto'; % 'auto', 'load_from_logfile', 'manual' or 'load' (from previous manual/auto run)
+thresh.cardiac.initial_cpulse_select.min = 0.04;
+thresh.cardiac.posthoc_cpulse_select.method = 'off'; % 'off', 'manual' or 'load'
 
 
 %% 5. Order of RETROICOR-expansions for cardiac, respiratory and
@@ -98,8 +98,5 @@ physio.thresh       = thresh;
 physio.sqpar        = sqpar;
 physio.model        = model;
 physio.verbose      = verbose;
-
-physio = tapas_physio_new('manual_peak_select', physio);          % loads pre-specified parameter set for manual post-hoc peak selection
-physio.thresh.cardiac.posthoc_cpulse_select.method = 'load'; % 'off', 'manual' or 'load'
 
 [physio_out, R, ons_secs] = tapas_physio_main_create_regressors(physio);
