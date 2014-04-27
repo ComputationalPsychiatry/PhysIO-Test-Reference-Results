@@ -40,7 +40,7 @@ log_files.respiration       = 'SCANPHYSLOG.log';
 %% 2. Define Nominal Sequence Parameter (Scan Timing)
 
 sqpar.Nslices           = 37;
-sqpar.NslicesPerBeat    = 37;
+sqpar.NslicesPerBeat    = 37; % typically equivalent to Nslices; exception: heartbeat-triggered sequence
 sqpar.TR                = 2.50;
 sqpar.Ndummies          = 3;
 sqpar.Nscans            = 495;
@@ -48,7 +48,7 @@ sqpar.onset_slice       = 19;
 sqpar.Nprep             = []; % set to >=0 to count scans and dummy 
                               % volumes from beginning of run, i.e. logfile,
                               % includes counting of preparation gradients
-sqpar.TimeSliceToSlice  = sqpar.TR / sqpar.Nslices;
+sqpar.time_slice_to_slice  = sqpar.TR / sqpar.Nslices;
 
 
 %% 3. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
@@ -96,9 +96,9 @@ verbose.fig_output_file = 'PhysIO_output_level2.fig'; % Physio.tiff, .ps, .fig p
 %% 7. Run the main script with defined parameters
 
 physio.log_files    = log_files;
-physio.thresh       = thresh;
 physio.sqpar        = sqpar;
 physio.model        = model;
+physio.thresh       = thresh;
 physio.verbose      = verbose;
 
 [physio_out, R, ons_secs] = tapas_physio_main_create_regressors(physio);
