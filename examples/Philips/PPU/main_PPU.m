@@ -52,7 +52,7 @@ sqpar.onset_slice       = 17;
 
 
 %% 3. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
-thresh.scan_timing = struct('zero', 700, 'slice', 1800, 'vol', [], ...
+thresh.scan_timing = struct('method', 'gradient_log', 'zero', 700, 'slice', 1800, 'vol', [], ...
  'grad_direction', 'y');
 thresh.scan_timing.vol = [];
 thresh.scan_timing.vol_spacing = []; % in seconds
