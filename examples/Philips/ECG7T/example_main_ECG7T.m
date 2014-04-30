@@ -52,7 +52,16 @@ sqpar.onset_slice       = 18;
 % sqpar.Nprep = 3;
 
 
-%% 3. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
+%% 3. Order of RETROICOR-expansions for cardiac, respiratory and
+%% interaction terms. Option to orthogonalise regressors
+
+model.type = 'RETROICOR';
+model.order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
+model.input_other_multiple_regressors = 'rp_fMRI.txt'; % either txt-file or mat-file with variable R
+model.output_multiple_regressors = 'multiple_regressors.txt';
+
+
+%% 4. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
 thresh.scan_timing = struct('method', 'gradient_log', ...
     'zero', 1500, 'slice', 2200, 'vol', [], ...
  'grad_direction', 'y');
@@ -60,25 +69,17 @@ thresh.scan_timing.vol = [];
 thresh.scan_timing.vol_spacing = 90e-3; % in seconds
 
 
-%% 4. Define which Cardiac Data Shall be Used
+%% 5. Define which Cardiac Data Shall be Used
 
-%% 4.1. Using heart beat events logged prospectively during scanning instead
+%% 5.1. Using heart beat events logged prospectively during scanning instead
 thresh.cardiac.modality = 'ECG'; % 'ECG' or 'OXY' (for pulse oximetry)
 
-%% 4.2. Using ECG time curve to detect heartbeat events, via a chosen or
+%% 5.2. Using ECG time curve to detect heartbeat events, via a chosen or
 %% saved reference R-peak
 thresh.cardiac.initial_cpulse_select.method = 'auto'; % 'auto', 'load_from_logfile', 'manual' or 'load' (from previous manual/auto run)
 thresh.cardiac.initial_cpulse_select.min = 0.4;
 thresh.cardiac.posthoc_cpulse_select.method = 'off'; % 'off', 'manual' or 'load'
 
-
-%% 5. Order of RETROICOR-expansions for cardiac, respiratory and
-%% interaction terms. Option to orthogonalise regressors
-
-model.type = 'RETROICOR';
-model.order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
-model.input_other_multiple_regressors = 'rp_fMRI.txt'; % either txt-file or mat-file with variable R
-model.output_multiple_regressors = 'multiple_regressors.txt';
 
 
 %% 6. Output Figures to be generated
