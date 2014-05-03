@@ -54,26 +54,8 @@ sqpar.onset_slice       = 17;
 % sqpar.Nprep = 3;
 
 
-%% 3. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
-thresh.scan_timing = struct('method', 'gradient_log', 'zero', 700, 'slice', 1800, 'vol', [], ...
- 'grad_direction', 'y');
-thresh.scan_timing.vol = [];
-thresh.scan_timing.vol_spacing = []; % in seconds
 
-
-%% 4. Define which Cardiac Data Shall be Used
-
-%% 4.1. Using heart beat events logged prospectively during scanning instead
-thresh.cardiac.modality = 'OXY'; % 'ECG','ECG_raw', 'OXY' or 'OXYGE' (for pulse oximetry)
-
-%% 4.2. Using ECG time curve to detect heartbeat events, via a chosen or
-%% saved reference R-peak
-thresh.cardiac.initial_cpulse_select.min = 1;
-thresh.cardiac.initial_cpulse_select.file = ''; % used to save reference peak or load it from there, if manual_peak_select == true
-thresh.cardiac.initial_cpulse_select.method = 'manual'; % 'load_from_logfile', 'manual' or 'load' (from previous manual run)
-
-
-%% 5. Order of RETROICOR-expansions for cardiac, respiratory and
+%% 3. Order of RETROICOR-expansions for cardiac, respiratory and
 %% interaction terms. Option to orthogonalise regressors
 
 model.type = 'RETROICOR_HRV_RVT';
@@ -82,15 +64,33 @@ model.input_other_multiple_regressors = ''; % either txt-file or mat-file with v
 model.output_multiple_regressors = 'multiple_regressors.txt';
 
 
+%% 4. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
+thresh.scan_timing = struct('method', 'gradient_log', 'zero', 700, 'slice', 1800, 'vol', [], ...
+ 'grad_direction', 'y');
+thresh.scan_timing.vol = [];
+thresh.scan_timing.vol_spacing = []; % in seconds
+
+
+%% 5. Define which Cardiac Data Shall be Used
+
+%% 5.1. Using heart beat events logged prospectively during scanning instead
+thresh.cardiac.modality = 'OXY'; % 'ECG','ECG_raw', 'OXY' or 'OXYGE' (for pulse oximetry)
+
+%% 5.2. Using ECG time curve to detect heartbeat events, via a chosen or
+%% saved reference R-peak
+thresh.cardiac.initial_cpulse_select.min = 1;
+thresh.cardiac.initial_cpulse_select.method = 'auto'; % 'load_from_logfile', 'manual' or 'load' (from previous manual run)
+
+
 %% 6. Output Figures to be generated
 
-verbose.level = 3;
+verbose.level = 2;
 % 0 = none; 
 % 1 = main plots (default); 
 % 2 = debugging plots: for missed slice/volume events, missed heartbeats, 1D time series of created regressors
 % 3 = all plots, incl. cardiac/respiratory phase estimation,
 %     slice-to-volume assignment
-verbose.fig_output_file = 'PhysIO_output.ps';
+verbose.fig_output_file = 'PhysIO_output_level2.jpg';
 
 
 %% 7. Run the main script with defined parameters
