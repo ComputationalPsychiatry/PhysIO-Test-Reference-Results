@@ -3,6 +3,7 @@
 % spm SPM - SPM12b (5672)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
+matlabbatch{1}.spm.tools.physio.save_dir = {''};
 matlabbatch{1}.spm.tools.physio.log_files.vendor = 'Philips';
 matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'SCANPHYSLOG.log'};
 matlabbatch{1}.spm.tools.physio.log_files.respiration = {'SCANPHYSLOG.log'};
