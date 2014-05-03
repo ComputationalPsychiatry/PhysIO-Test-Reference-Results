@@ -1,10 +1,14 @@
-% Script that executes ECG 7T Philips logfile. Just press play (F5)
+% example_main_ECG7T
+% ==================
 %
-% 
-% Note: 
-% - This is the input script to the PhysIO toolbox. Only this file has to be adapted for your study.
+% Script that executes ECG 7T Philips logfile. Just press play (F5)
+% Download the logfile from 
+%       http://www.translationalneuromodeling.org/software/tapas-data/
+%
+% Note:
+%       
 % - For documentation of any of the defined substructures here, please
-% see also tapas_physio_new.m or the Manual_PhysIO-file.
+%   see also tapas_physio_new.m or the Manual_PhysIO-file.
 %
 % Copyright (C) 2013, Institute for Biomedical Engineering, ETH/Uni Zurich.
 %
@@ -12,6 +16,7 @@
 % Licence (GPL), version 3. You can redistribute it and/or modify it under the terms of the GPL
 % (either version 3 or, at your option, any later version). For further details, see the file
 % COPYING or <http://www.gnu.org/licenses/>.
+%
 %
 % $Id$
 %

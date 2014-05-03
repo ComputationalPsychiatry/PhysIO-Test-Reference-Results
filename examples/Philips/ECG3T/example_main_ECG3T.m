@@ -1,10 +1,14 @@
-% Script that executes ECG 3T Philips logfile. Just press play (F5)
+% example_main_ECG3T
+% ==================
 %
+% Script that executes ECG 3T Philips logfile. Just press play (F5)
+% Download the logfile from 
+%       http://www.translationalneuromodeling.org/software/tapas-data/
 %
 % Note:
-% - This is the input script to the PhysIO toolbox. Only this file has to be adapted for your study.
+%       
 % - For documentation of any of the defined substructures here, please
-% see also tapas_physio_new.m or the Manual_PhysIO-file.
+%   see also tapas_physio_new.m or the Manual_PhysIO-file.
 %
 % Copyright (C) 2013, Institute for Biomedical Engineering, ETH/Uni Zurich.
 %
