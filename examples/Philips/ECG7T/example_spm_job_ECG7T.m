@@ -1,12 +1,12 @@
 %-----------------------------------------------------------------------
-% Job saved on 30-Apr-2014 15:08:38 by cfg_util (rev $Rev: 4972 $)
+% Job saved on 13-Aug-2014 18:39:20 by cfg_util (rev $Rev: 4972 $)
 % spm SPM - SPM12b (5672)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
 matlabbatch{1}.spm.tools.physio.save_dir = {''};
 matlabbatch{1}.spm.tools.physio.log_files.vendor = 'Philips';
-matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'/Users/kasperla/Documents/code/matlab/smoothing_trunk/tSNR_fMRI_SPM/CheckPhysRETROICOR/PhysIOToolbox/examples/Philips/ECG7T/SCANPHYSLOG.log'};
-matlabbatch{1}.spm.tools.physio.log_files.respiration = {'/Users/kasperla/Documents/code/matlab/smoothing_trunk/tSNR_fMRI_SPM/CheckPhysRETROICOR/PhysIOToolbox/examples/Philips/ECG7T/SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.respiration = {'SCANPHYSLOG.log'};
 matlabbatch{1}.spm.tools.physio.log_files.sampling_interval = [];
 matlabbatch{1}.spm.tools.physio.log_files.relative_start_acquisition = 0;
 matlabbatch{1}.spm.tools.physio.sqpar.Nslices = 36;
@@ -31,7 +31,7 @@ matlabbatch{1}.spm.tools.physio.thresh.scan_timing.slice = 2200;
 matlabbatch{1}.spm.tools.physio.thresh.scan_timing.vol = [];
 matlabbatch{1}.spm.tools.physio.thresh.scan_timing.vol_spacing = 0.09;
 matlabbatch{1}.spm.tools.physio.thresh.cardiac.modality = 'ECG';
-matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.method = 'auto';
+matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.method = 'auto_matched';
 matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.min = 0.4;
 matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.file = 'kRpeakfile.mat';
 matlabbatch{1}.spm.tools.physio.thresh.cardiac.posthoc_cpulse_select.method = 'off';
