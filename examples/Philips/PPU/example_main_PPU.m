@@ -79,7 +79,7 @@ thresh.cardiac.modality = 'OXY'; % 'ECG','ECG_raw', 'OXY' or 'OXYGE' (for pulse 
 %% 5.2. Using ECG time curve to detect heartbeat events, via a chosen or
 %% saved reference R-peak
 thresh.cardiac.initial_cpulse_select.min = 1;
-thresh.cardiac.initial_cpulse_select.method = 'auto'; % 'load_from_logfile', 'manual' or 'load' (from previous manual run)
+thresh.cardiac.initial_cpulse_select.method = 'auto_template'; % 'load_from_logfile', 'manual' or 'load' (from previous manual run)
 
 
 %% 6. Output Figures to be generated

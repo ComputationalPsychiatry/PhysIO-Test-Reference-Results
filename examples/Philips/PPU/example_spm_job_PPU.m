@@ -5,8 +5,8 @@
 %-----------------------------------------------------------------------
 matlabbatch{1}.spm.tools.physio.save_dir = {''};
 matlabbatch{1}.spm.tools.physio.log_files.vendor = 'Philips';
-matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'/Users/kasperla/Documents/code/matlab/smoothing_trunk/tSNR_fMRI_SPM/CheckPhysRETROICOR/PhysIOToolbox/examples/Philips/PPU/SCANPHYSLOG.log'};
-matlabbatch{1}.spm.tools.physio.log_files.respiration = {'/Users/kasperla/Documents/code/matlab/smoothing_trunk/tSNR_fMRI_SPM/CheckPhysRETROICOR/PhysIOToolbox/examples/Philips/PPU/SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.respiration = {'SCANPHYSLOG.log'};
 matlabbatch{1}.spm.tools.physio.log_files.sampling_interval = [];
 matlabbatch{1}.spm.tools.physio.log_files.relative_start_acquisition = 0;
 matlabbatch{1}.spm.tools.physio.sqpar.Nslices = 32;
@@ -31,7 +31,7 @@ matlabbatch{1}.spm.tools.physio.thresh.scan_timing.slice = 1800;
 matlabbatch{1}.spm.tools.physio.thresh.scan_timing.vol = [];
 matlabbatch{1}.spm.tools.physio.thresh.scan_timing.vol_spacing = [];
 matlabbatch{1}.spm.tools.physio.thresh.cardiac.modality = 'PPU';
-matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.method = 'auto';
+matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.method = 'auto_template';
 matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.min = 0.4;
 matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.file = 'initial_cpulse_kRpeakfile.mat';
 matlabbatch{1}.spm.tools.physio.thresh.cardiac.posthoc_cpulse_select.method = 'off';
