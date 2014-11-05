@@ -60,9 +60,9 @@ sqpar.time_slice_to_slice  = sqpar.TR / sqpar.Nslices;
 %% 3. Order of RETROICOR-expansions for cardiac, respiratory and
 %% interaction terms. Option to orthogonalise regressors
 
-model.type = 'RETROICOR';
+model.type = 'none';
 model.order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
-model.input_other_multiple_regressors = 'rp_fMRI.txt'; % either .txt-file or .mat-file (saves variable R)
+model.input_other_multiple_regressors = '';'rp_fMRI.txt'; % either .txt-file or .mat-file (saves variable R)
 model.output_multiple_regressors = 'multiple_regressors.txt';
 
 %% 4. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
