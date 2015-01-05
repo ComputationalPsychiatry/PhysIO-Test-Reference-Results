@@ -1,108 +1,34 @@
-% example_main_ECG3T
-% ==================
-%
-% Script that executes ECG 3T Philips logfile. Just press play (F5)
-% Download the logfile from 
-%       http://www.translationalneuromodeling.org/software/tapas-data/
-%
-% Note:
-%       
-% - For documentation of any of the defined substructures here, please
-%   see also tapas_physio_new.m or the Manual_PhysIO-file.
-%
-% Copyright (C) 2013, Institute for Biomedical Engineering, ETH/Uni Zurich.
-%
-% This file is part of the PhysIO toolbox, which is released under the terms of the GNU General Public
-% Licence (GPL), version 3. You can redistribute it and/or modify it under the terms of the GPL
-% (either version 3 or, at your option, any later version). For further details, see the file
-% COPYING or <http://www.gnu.org/licenses/>.
-%
-% $Id$
-%
-%% 0. Put code directory into path; for some options, SPM should also be in the path
-
-pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
-    '../../../code');
-
-addpath(genpath(pathRETROICORcode));
-
-physio      = tapas_physio_new();         % create structure, numbering according to *PhysIO_PhysNoiseBackground.pptx
-log_files   = physio.log_files;     % 1a) Read logfiles
-sqpar       = physio.sqpar;         % 1b) Sequence timing
-thresh      = physio.thresh;        % 2) Preprocess phys & align scan-timing
-model       = physio.model;         % 3)/4) Model physiological time series
-verbose     = physio.verbose;       % Auxiliary: Output
-
-
-%% 1. Define Input Files
-
-log_files.vendor            = 'Philips';
-log_files.cardiac           = 'SCANPHYSLOG.log';
-log_files.respiration       = 'SCANPHYSLOG.log';
-
-
-
-%% 2. Define Nominal Sequence Parameter (Scan Timing)
-
-sqpar.Nslices           = 37;
-sqpar.NslicesPerBeat    = 37; % typically equivalent to Nslices; exception: heartbeat-triggered sequence
-sqpar.TR                = 2.50;
-sqpar.Ndummies          = 3;
-sqpar.Nscans            = 495;
-sqpar.onset_slice       = 19;
-sqpar.Nprep             = []; % set to >=0 to count scans and dummy
-% volumes from beginning of run, i.e. logfile,
-% includes counting of preparation gradients
-sqpar.time_slice_to_slice  = sqpar.TR / sqpar.Nslices;
-
-
-
-%% 3. Order of RETROICOR-expansions for cardiac, respiratory and
-%% interaction terms. Option to orthogonalise regressors
-
-model.type = 'RETROICOR';
-model.order = struct('c',3,'r',4,'cr',1, 'orthogonalise', 'none');
-model.input_other_multiple_regressors = 'rp_fMRI.txt'; % either .txt-file or .mat-file (saves variable R)
-model.output_multiple_regressors = 'multiple_regressors.txt';
-
-%% 4. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
-%
-% method to determine slice onset times
-% 'nominal' - to derive slice acquisition timing from sqpar directly
-% 'gradient' or 'gradient_log' - derive from logged gradient time courses
-%                                in SCANPHYSLOG-files (Philips only)
-thresh.scan_timing.method = 'gradient_log'; %'gradient_log'; 'nominal'
-thresh.scan_timing.grad_direction = 'y';
-thresh.scan_timing.zero         = 1700;
-thresh.scan_timing.slice        = 1800;
-thresh.scan_timing.vol          = [];   % leave [], if unused; set value >=.slice,
-% if volume start gradients are higher than slice gradients
-thresh.scan_timing.vol_spacing  = [];   % leave [], if unused; set to e.g. 50e-3 (seconds),
-% if there is a time gap between last slice of a volume
-% and first slice of the next
-
-
-
-%% 5. Define which Cardiac Data Shall be Used
-
-thresh.cardiac.modality = 'ECG';
-thresh.cardiac.initial_cpulse_select.method = 'load_from_logfile';
-thresh.cardiac.posthoc_cpulse_select.method = 'off';
-
-
-
-%% 6. Output Figures to be generated
-
-verbose.level           = 2; % 0 = none; 1 = main plots (default);  2 = debugging plots, for setting up new study; 3 = all plots
-verbose.fig_output_file = 'PhysIO_output_level2.fig'; % Physio.tiff, .ps, .fig possible
-
-
-%% 7. Run the main script with defined parameters
-
-physio.log_files    = log_files;
-physio.sqpar        = sqpar;
-physio.model        = model;
-physio.thresh       = thresh;
-physio.verbose      = verbose;
-
-[physio_out, R, ons_secs] = tapas_physio_main_create_regressors(physio);
+%-----------------------------------------------------------------------
+% Job saved on 06-Jan-2015 00:34:20 by cfg_util (rev $Rev: 6134 $)
+% spm SPM - SPM12 (6225)
+% cfg_basicio BasicIO - Unknown
+%-----------------------------------------------------------------------
+matlabbatch{1}.spm.tools.physio.save_dir = {''};
+matlabbatch{1}.spm.tools.physio.log_files.vendor = 'Philips';
+matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'C:\Users\kasperla\Documents\code\matlab\smoothing_trunk\PhysIOToolbox\examples\Philips\ECG3T\SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.respiration = {'C:\Users\kasperla\Documents\code\matlab\smoothing_trunk\PhysIOToolbox\examples\Philips\ECG3T\SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.scan_timing = {'C:\Users\kasperla\Documents\code\matlab\smoothing_trunk\PhysIOToolbox\examples\Philips\ECG3T\SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.sampling_interval = [];
+matlabbatch{1}.spm.tools.physio.log_files.relative_start_acquisition = 0;
+matlabbatch{1}.spm.tools.physio.sqpar.Nslices = 37;
+matlabbatch{1}.spm.tools.physio.sqpar.NslicesPerBeat = [];
+matlabbatch{1}.spm.tools.physio.sqpar.TR = 2.5;
+matlabbatch{1}.spm.tools.physio.sqpar.Ndummies = 3;
+matlabbatch{1}.spm.tools.physio.sqpar.Nscans = 495;
+matlabbatch{1}.spm.tools.physio.sqpar.onset_slice = 19;
+matlabbatch{1}.spm.tools.physio.sqpar.time_slice_to_slice = [];
+matlabbatch{1}.spm.tools.physio.sqpar.Nprep = [];
+matlabbatch{1}.spm.tools.physio.model.type = 'RETROICOR';
+matlabbatch{1}.spm.tools.physio.model.order.c = 3;
+matlabbatch{1}.spm.tools.physio.model.order.r = 4;
+matlabbatch{1}.spm.tools.physio.model.order.cr = 1;
+matlabbatch{1}.spm.tools.physio.model.order.orthogonalise = 'none';
+matlabbatch{1}.spm.tools.physio.model.input_other_multiple_regressors = {'C:\Users\kasperla\Documents\code\matlab\smoothing_trunk\PhysIOToolbox\examples\Philips\ECG3T\Users\kasperla\Documents\code\matlab\smoothing_trunk\PhysIOToolbox\examples\Philips\ECG3T\rp_fMRI.txt'};
+matlabbatch{1}.spm.tools.physio.model.output_multiple_regressors = 'multiple_regressors.txt';
+matlabbatch{1}.spm.tools.physio.thresh.scan_timing.nominal = struct([]);
+matlabbatch{1}.spm.tools.physio.thresh.cardiac.modality = 'ECG';
+matlabbatch{1}.spm.tools.physio.thresh.cardiac.initial_cpulse_select.load_from_logfile = struct([]);
+matlabbatch{1}.spm.tools.physio.thresh.cardiac.posthoc_cpulse_select.off = struct([]);
+matlabbatch{1}.spm.tools.physio.verbose.level = 2;
+matlabbatch{1}.spm.tools.physio.verbose.fig_output_file = 'PhysIO_output_level2.fig';
+matlabbatch{1}.spm.tools.physio.verbose.use_tabs = false;
