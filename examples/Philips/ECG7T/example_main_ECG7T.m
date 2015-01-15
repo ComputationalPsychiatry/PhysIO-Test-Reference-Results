@@ -68,7 +68,7 @@ model.output_multiple_regressors = 'multiple_regressors.txt';
 
 %% 4. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
 thresh.scan_timing = struct('method', 'gradient_log', ...
-    'zero', 1500, 'slice', 2200, 'vol', [], ...
+    'zero', 0.7, 'slice', 0.75, 'vol', [], ...
  'grad_direction', 'y');
 thresh.scan_timing.vol = [];
 thresh.scan_timing.vol_spacing = 90e-3; % in seconds
@@ -81,7 +81,7 @@ thresh.cardiac.modality = 'ECG'; % 'ECG' or 'OXY' (for pulse oximetry)
 
 %% 5.2. Using ECG time curve to detect heartbeat events, via a chosen or
 %% saved reference R-peak
-thresh.cardiac.initial_cpulse_select.method = 'auto_template'; % 'auto', 'load_from_logfile', 'manual' or 'load' (from previous manual/auto run)
+thresh.cardiac.initial_cpulse_select.method = 'load_from_logfile';'auto_template'; % 'auto', 'load_from_logfile', 'manual' or 'load' (from previous manual/auto run)
 thresh.cardiac.initial_cpulse_select.min = 0.4;
 thresh.cardiac.posthoc_cpulse_select.method = 'off'; % 'off', 'manual' or 'load'
 
@@ -89,7 +89,7 @@ thresh.cardiac.posthoc_cpulse_select.method = 'off'; % 'off', 'manual' or 'load'
 
 %% 6. Output Figures to be generated
 
-verbose.level = 3;
+verbose.level = 2;
 % 0 = none; 
 % 1 = main plots (default); 
 % 2 = debugging plots: for missed slice/volume events, missed heartbeats, 1D time series of created regressors
