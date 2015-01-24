@@ -10,7 +10,11 @@
 % - For documentation of any of the defined substructures here, please
 %   see also tapas_physio_new.m or the Manual_PhysIO-file.
 %
-% Copyright (C) 2013, Institute for Biomedical Engineering, ETH/Uni Zurich.
+%
+% Author: Lars Kasper
+% Created: 2013-02-18
+% Copyright (C) 2015 TNU, Institute for Biomedical Engineering,
+%           University of Zurich and ETH Zurich.
 %
 % This file is part of the PhysIO toolbox, which is released under the terms of the GNU General Public
 % Licence (GPL), version 3. You can redistribute it and/or modify it under the terms of the GPL
@@ -73,8 +77,8 @@ model.output_multiple_regressors = 'multiple_regressors.txt';
 %                                in SCANPHYSLOG-files (Philips only)
 thresh.scan_timing.method = 'gradient_log'; %'gradient_log'; 'nominal'
 thresh.scan_timing.grad_direction = 'y';
-thresh.scan_timing.zero         = 1700;
-thresh.scan_timing.slice        = 1800;
+thresh.scan_timing.zero         = 0.4;
+thresh.scan_timing.slice        = 0.45;
 thresh.scan_timing.vol          = [];   % leave [], if unused; set value >=.slice,
 % if volume start gradients are higher than slice gradients
 thresh.scan_timing.vol_spacing  = [];   % leave [], if unused; set to e.g. 50e-3 (seconds),
