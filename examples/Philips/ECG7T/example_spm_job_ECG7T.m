@@ -5,8 +5,8 @@
 %-----------------------------------------------------------------------
 matlabbatch{1}.spm.tools.physio.save_dir = {''};
 matlabbatch{1}.spm.tools.physio.log_files.vendor = 'Philips';
-matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'/Users/kasperla/Documents/code/matlab/smoothing_trunk/PhysIOToolbox/examples/Philips/ECG7T/SCANPHYSLOG.log'};
-matlabbatch{1}.spm.tools.physio.log_files.respiration = {'/Users/kasperla/Documents/code/matlab/smoothing_trunk/PhysIOToolbox/examples/Philips/ECG7T/SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'SCANPHYSLOG.log'};
+matlabbatch{1}.spm.tools.physio.log_files.respiration = {'SCANPHYSLOG.log'};
 matlabbatch{1}.spm.tools.physio.log_files.scan_timing = {''};
 matlabbatch{1}.spm.tools.physio.log_files.sampling_interval = [];
 matlabbatch{1}.spm.tools.physio.log_files.relative_start_acquisition = 0;
@@ -23,7 +23,10 @@ matlabbatch{1}.spm.tools.physio.model.retroicor.yes.order.r = 4;
 matlabbatch{1}.spm.tools.physio.model.retroicor.yes.order.cr = 1;
 matlabbatch{1}.spm.tools.physio.model.orthogonalise = 'none';
 matlabbatch{1}.spm.tools.physio.model.movement.yes.file_realignment_parameters = ...
-    {'/Users/kasperla/Documents/code/matlab/smoothing_trunk/tSNR_fMRI_SPM/CheckPhysRETROICOR/PhysIOToolbox/examples/Philips/ECG7T/rp_fMRI.txt'};
+    {'rp_fMRI.txt'};
+matlabbatch{1}.spm.tools.physio.model.movement.yes.order = 6;
+matlabbatch{1}.spm.tools.physio.model.movement.yes.outlier_rotation_deg = Inf;
+matlabbatch{1}.spm.tools.physio.model.movement.yes.outlier_translation_mm = 3;
 matlabbatch{1}.spm.tools.physio.model.output_multiple_regressors = 'multiple_regressors.txt';
 matlabbatch{1}.spm.tools.physio.scan_timing.sync.gradient_log.grad_direction = 'y';
 matlabbatch{1}.spm.tools.physio.scan_timing.sync.gradient_log.zero = 1500;
