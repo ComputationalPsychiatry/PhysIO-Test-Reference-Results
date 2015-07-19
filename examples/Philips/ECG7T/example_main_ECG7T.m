@@ -29,8 +29,9 @@ addpath(genpath(pathRETROICORcode));
 
 physio      = tapas_physio_new();
 log_files   = physio.log_files;
-thresh      = physio.thresh;
-sqpar       = physio.sqpar;
+preproc     = physio.preproc;
+sqpar       = physio.scan_timing.sqpar;
+sync        = physio.scan_timing.sync;
 model       = physio.model;
 verbose     = physio.verbose;
 
@@ -67,23 +68,23 @@ model.output_multiple_regressors = 'multiple_regressors.txt';
 
 
 %% 4. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
-thresh.scan_timing = struct('method', 'gradient_log', ...
+scan_timing.sync = struct('method', 'gradient_log', ...
     'zero', 0.7, 'slice', 0.75, 'vol', [], ...
  'grad_direction', 'y');
-thresh.scan_timing.vol = [];
-thresh.scan_timing.vol_spacing = 90e-3; % in seconds
+scan_timing.sync.vol = [];
+scan_timing.sync.vol_spacing = 90e-3; % in seconds
 
 
 %% 5. Define which Cardiac Data Shall be Used
 
 %% 5.1. Using heart beat events logged prospectively during scanning instead
-thresh.cardiac.modality = 'ECG'; % 'ECG' or 'OXY' (for pulse oximetry)
+preproc.cardiac.modality = 'ECG'; % 'ECG' or 'OXY' (for pulse oximetry)
 
 %% 5.2. Using ECG time curve to detect heartbeat events, via a chosen or
 %% saved reference R-peak
-thresh.cardiac.initial_cpulse_select.method = 'load_from_logfile';'auto_template'; % 'auto', 'load_from_logfile', 'manual' or 'load' (from previous manual/auto run)
-thresh.cardiac.initial_cpulse_select.min = 0.4;
-thresh.cardiac.posthoc_cpulse_select.method = 'off'; % 'off', 'manual' or 'load'
+preproc.cardiac.initial_cpulse_select.method = 'load_from_logfile';'auto_template'; % 'auto', 'load_from_logfile', 'manual' or 'load' (from previous manual/auto run)
+preproc.cardiac.initial_cpulse_select.min = 0.4;
+preproc.cardiac.posthoc_cpulse_select.method = 'off'; % 'off', 'manual' or 'load'
 
 
 
@@ -100,10 +101,11 @@ verbose.fig_output_file = 'PhysIO_output.ps';
 
 %% 7. Run the main script with defined parameters
 
-physio.log_files    = log_files;
-physio.thresh       = thresh;
-physio.sqpar        = sqpar;
-physio.model        = model;
-physio.verbose      = verbose;
+physio.log_files            = log_files;
+physio.preproc              = preproc;
+physio.scan_timing.sqpar    = sqpar;
+physio.scan_timing.sync     = sync;
+physio.model                = model;
+physio.verbose              = verbose;
 
 [physio_out, R, ons_secs] = tapas_physio_main_create_regressors(physio);
