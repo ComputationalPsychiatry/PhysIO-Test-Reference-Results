@@ -30,12 +30,13 @@ pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
 
 addpath(genpath(pathRETROICORcode));
 
-physio      = tapas_physio_new();         % create structure, numbering according to *PhysIO_PhysNoiseBackground.pptx
-log_files   = physio.log_files;     % 1a) Read logfiles
-sqpar       = physio.sqpar;         % 1b) Sequence timing
-thresh      = physio.thresh;        % 2) Preprocess phys & align scan-timing
-model       = physio.model;         % 3)/4) Model physiological time series
-verbose     = physio.verbose;       % Auxiliary: Output
+physio      = tapas_physio_new();
+log_files   = physio.log_files;
+preproc     = physio.preproc;
+sqpar       = physio.scan_timing.sqpar;
+sync        = physio.scan_timing.sync;
+model       = physio.model;
+verbose     = physio.verbose;
 
 
 %% 1. Define Input Files
@@ -75,13 +76,13 @@ model.output_multiple_regressors = 'multiple_regressors.txt';
 % 'nominal' - to derive slice acquisition timing from sqpar directly
 % 'gradient' or 'gradient_log' - derive from logged gradient time courses
 %                                in SCANPHYSLOG-files (Philips only)
-thresh.scan_timing.method = 'gradient_log'; %'gradient_log'; 'nominal'
-thresh.scan_timing.grad_direction = 'y';
-thresh.scan_timing.zero         = 0.4;
-thresh.scan_timing.slice        = 0.45;
-thresh.scan_timing.vol          = [];   % leave [], if unused; set value >=.slice,
+sync.method = 'gradient_log'; %'gradient_log'; 'nominal'
+sync.grad_direction = 'y';
+sync.zero         = 0.4;
+sync.slice        = 0.45;
+sync.vol          = [];   % leave [], if unused; set value >=.slice,
 % if volume start gradients are higher than slice gradients
-thresh.scan_timing.vol_spacing  = [];   % leave [], if unused; set to e.g. 50e-3 (seconds),
+sync.vol_spacing  = [];   % leave [], if unused; set to e.g. 50e-3 (seconds),
 % if there is a time gap between last slice of a volume
 % and first slice of the next
 
@@ -89,9 +90,9 @@ thresh.scan_timing.vol_spacing  = [];   % leave [], if unused; set to e.g. 50e-3
 
 %% 5. Define which Cardiac Data Shall be Used
 
-thresh.cardiac.modality = 'ECG';
-thresh.cardiac.initial_cpulse_select.method = 'load_from_logfile';
-thresh.cardiac.posthoc_cpulse_select.method = 'off';
+preproc.cardiac.modality = 'ECG';
+preproc.cardiac.initial_cpulse_select.method = 'load_from_logfile';
+preproc.cardiac.posthoc_cpulse_select.method = 'off';
 
 
 
@@ -103,10 +104,11 @@ verbose.fig_output_file = 'PhysIO_output_level2.fig'; % Physio.tiff, .ps, .fig p
 
 %% 7. Run the main script with defined parameters
 
-physio.log_files    = log_files;
-physio.sqpar        = sqpar;
-physio.model        = model;
-physio.thresh       = thresh;
-physio.verbose      = verbose;
+physio.log_files            = log_files;
+physio.preproc              = preproc;
+physio.scan_timing.sqpar    = sqpar;
+physio.scan_timing.sync     = sync;
+physio.model                = model;
+physio.verbose              = verbose;
 
 [physio_out, R, ons_secs] = tapas_physio_main_create_regressors(physio);
