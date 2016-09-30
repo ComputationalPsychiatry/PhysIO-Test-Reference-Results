@@ -26,8 +26,9 @@ addpath(genpath(pathRETROICORcode));
 
 physio      = tapas_physio_new();
 log_files   = physio.log_files;
-thresh      = physio.thresh;
-sqpar       = physio.sqpar;
+preproc     = physio.preproc;
+sqpar       = physio.scan_timing.sqpar;
+sync        = physio.scan_timing.sync;
 model       = physio.model;
 verbose     = physio.verbose;
 
@@ -65,21 +66,21 @@ model.output_multiple_regressors = 'multiple_regressors.txt';
 
 
 %% 4. Define Gradient Thresholds to Infer Gradient Timing (Philips only)
-thresh.scan_timing = struct('method', 'gradient_log', 'zero', 700, 'slice', 1800, 'vol', [], ...
+sync = struct('method', 'gradient_log', 'zero', 700, 'slice', 1800, 'vol', [], ...
  'grad_direction', 'y');
-thresh.scan_timing.vol = [];
-thresh.scan_timing.vol_spacing = []; % in seconds
+sync.vol = [];
+sync.vol_spacing = []; % in seconds
 
 
 %% 5. Define which Cardiac Data Shall be Used
 
 %% 5.1. Using heart beat events logged prospectively during scanning instead
-thresh.cardiac.modality = 'OXY'; % 'ECG','ECG_raw', 'OXY' or 'OXYGE' (for pulse oximetry)
+preproc.cardiac.modality = 'OXY'; % 'ECG','ECG_raw', 'OXY' or 'OXYGE' (for pulse oximetry)
 
 %% 5.2. Using ECG time curve to detect heartbeat events, via a chosen or
 %% saved reference R-peak
-thresh.cardiac.initial_cpulse_select.min = 1;
-thresh.cardiac.initial_cpulse_select.method = 'auto_template'; % 'load_from_logfile', 'manual' or 'load' (from previous manual run)
+preproc.cardiac.initial_cpulse_select.min = 1;
+preproc.cardiac.initial_cpulse_select.method = 'auto_template'; % 'load_from_logfile', 'manual' or 'load' (from previous manual run)
 
 
 %% 6. Output Figures to be generated
@@ -95,11 +96,12 @@ verbose.fig_output_file = 'PhysIO_output_level2.jpg';
 
 %% 7. Run the main script with defined parameters
 
-physio.log_files    = log_files;
-physio.thresh       = thresh;
-physio.sqpar        = sqpar;
-physio.model        = model;
-physio.verbose      = verbose;
+physio.log_files            = log_files;
+physio.preproc              = preproc;
+physio.scan_timing.sqpar    = sqpar;
+physio.scan_timing.sync     = sync;
+physio.model                = model;
+physio.verbose              = verbose;
 
 % physio = tapas_physio_new('manual_peak_select', physio);
 % physio.thresh.cardiac.posthoc_cpulse_select.method = 'load';
