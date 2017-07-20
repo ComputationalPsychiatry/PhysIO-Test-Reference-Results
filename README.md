@@ -37,6 +37,10 @@ Each example script is saved in the respective folder with the logfile data. Thr
 - editable SPM job (`*spm_job.m`)
 - plain matlab script (`*matlab_script.m`)
 
+The examples only run through, if you have also installed the code for the PhysIO Toolbox, avaliable as the [`physio-public`](https://tnurepository.ethz.ch/physio/physio-public) repository, 
+which can be cloned from `git@tnurepository.ethz.ch:physio/physio-public.git`.
+
+
 Installation
 ------------
 
@@ -44,13 +48,13 @@ Installation
 2. Start Matlab
 3. Make sure the PhysIO Toolbox code-folder is added to the matlab path
 4. For use of the SPM Batch Editor:
-    a. Copy the PhysIO Toolbox code folder to <yourSPMFolder>/toolbox/PhysIO 
-    b. Restart Spm or call `spm_jobman('initcfg')` 
+    - Copy the PhysIO Toolbox code folder to `<yourSPMFolder>/toolbox/PhysIO`
+    - Restart SPM or call `spm_jobman('initcfg')` 
 
 Content
 --------
 
-The following datasets are available and can be downloaded with the toolbox in a specific repository [][https://tnurepository.ethz.ch/physio/physio-examples](`physio-examples`) which can be cloned from `git@tnurepository.ethz.ch:physio/physio-examples.git`.
+The following datasets are available and can be downloaded with the toolbox in a specific repository [`physio-examples`](https://tnurepository.ethz.ch/physio/physio-examples) which can be cloned from `git@tnurepository.ethz.ch:physio/physio-examples.git`.
 
 
 Philips
