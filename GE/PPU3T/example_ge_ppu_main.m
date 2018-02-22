@@ -13,14 +13,8 @@
 % (either version 3 or, at your option, any later version). For further details, see the file
 % COPYING or <http://www.gnu.org/licenses/>.
 %
-% $Id$
-%
 
-%% 0. Put code directory into path; for some options, SPM should also be in the path
-pathRETROICORcode = fullfile(fileparts(mfilename('fullpath')), ...
-    '../../../../public/code');
-
-addpath(genpath(pathRETROICORcode));
+%% 0. Generate physio structure, reference sub-structures
 
 physio      = tapas_physio_new();
 log_files   = physio.log_files;

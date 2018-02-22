@@ -1,9 +1,9 @@
 physio = tapas_physio_new();
 
-physio.save_dir = {'/Users/kasperla/Documents/code/matlab/PhysIO/private/examples/Philips/ECG3T_V2'};
+physio.save_dir = {''};
 physio.log_files.vendor = 'Philips';
-physio.log_files.cardiac = {'/Users/kasperla/Documents/code/matlab/PhysIO/private/examples/Philips/ECG3T_V2/SCANPHYSLOG.log'};
-physio.log_files.respiration = {'/Users/kasperla/Documents/code/matlab/PhysIO/private/examples/Philips/ECG3T_V2/SCANPHYSLOG.log'};
+physio.log_files.cardiac = {'SCANPHYSLOG.log'};
+physio.log_files.respiration = {'SCANPHYSLOG.log'};
 physio.log_files.relative_start_acquisition = 0;
 physio.log_files.align_scan = 'last';
 physio.scan_timing.sqpar.Nslices = 32;
