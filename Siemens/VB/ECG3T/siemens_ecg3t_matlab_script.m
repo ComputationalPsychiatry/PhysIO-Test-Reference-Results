@@ -1,7 +1,7 @@
 physio = tapas_physio_new();
 
 physio.log_files.vendor = 'Siemens';
-physio.log_files.cardiac = {'siemens_PAV.ecg'};
+physio.log_files.cardiac = {'C:\Users\kasperla\Documents\Code\PhysIO\dev\deploy\siemens_PAV.ecg'};
 physio.log_files.sampling_interval = 0.0025;
 physio.log_files.relative_start_acquisition = 0;
 physio.log_files.align_scan = 'last';
@@ -20,6 +20,7 @@ physio.preproc.cardiac.posthoc_cpulse_select.percentile = 80;
 physio.preproc.cardiac.posthoc_cpulse_select.upper_thresh = 60;
 physio.preproc.cardiac.posthoc_cpulse_select.lower_thresh = 60;
 physio.model.orthogonalise = 'none';
+physio.model.censor_unreliable_recording_intervals = false;
 physio.model.output_multiple_regressors = 'multiple_regressors.txt';
 physio.model.output_physio = 'physio.mat';
 physio.model.retroicor.include = true;
@@ -36,8 +37,8 @@ physio.model.noise_rois.n_voxel_crop = 0;
 physio.model.noise_rois.n_components = 1;
 physio.model.movement.include = false;
 physio.model.movement.order = 6;
-physio.model.movement.outlier_translation_mm = Inf;
-physio.model.movement.outlier_rotation_deg = Inf;
+physio.model.movement.censoring_threshold = 0.5;
+physio.model.movement.censoring_method = 'FD';
 physio.model.other.include = false;
 physio.verbose.level = 2;
 physio.verbose.process_log = cell(0, 1);
