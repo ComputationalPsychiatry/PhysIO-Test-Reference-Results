@@ -3,10 +3,10 @@
 % spm SPM - SPM12 (6906)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
-matlabbatch{1}.spm.tools.physio.save_dir = {'/Users/kasperla/polybox/Shared/PhysioUserData/32-hcp-reader-best-guess-saskia/178748/tfMRI_MOTOR_LR/OutPhysio'};
+matlabbatch{1}.spm.tools.physio.save_dir = {''};
 matlabbatch{1}.spm.tools.physio.log_files.vendor = 'Siemens_HCP';
-matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'/Users/kasperla/polybox/Shared/PhysioUserData/32-hcp-reader-best-guess-saskia/178748/tfMRI_MOTOR_LR/tfMRI_MOTOR_LR_Physio_log.txt'};
-matlabbatch{1}.spm.tools.physio.log_files.respiration = {'/Users/kasperla/polybox/Shared/PhysioUserData/32-hcp-reader-best-guess-saskia/178748/tfMRI_MOTOR_LR/tfMRI_MOTOR_LR_Physio_log.txt'};
+matlabbatch{1}.spm.tools.physio.log_files.cardiac = {'tfMRI_MOTOR_LR_Physio_log.txt'};
+matlabbatch{1}.spm.tools.physio.log_files.respiration = {'tfMRI_MOTOR_LR_Physio_log.txt'};
 matlabbatch{1}.spm.tools.physio.log_files.scan_timing = {''};
 matlabbatch{1}.spm.tools.physio.log_files.sampling_interval = [];
 matlabbatch{1}.spm.tools.physio.log_files.relative_start_acquisition = 0;
