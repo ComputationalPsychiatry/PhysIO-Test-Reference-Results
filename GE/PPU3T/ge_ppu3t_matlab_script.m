@@ -1,13 +1,8 @@
-%% Example script using PhysIO with Matlab only (no SPM needed)
-%  For documentation of the parameters, see also tapas_physio_new (e.g., via edit)
-
-%% Create default parameter structure with all fields
 physio = tapas_physio_new();
 
-%% Individual Parameter settings. Modify to your need and remove default settings
 physio.log_files.vendor = 'GE';
-physio.log_files.cardiac = {'ECGData_epiRT_phys_0921201215_38_08'};
-physio.log_files.respiration = {'RespData_epiRT_phys_0921201215_38_08'};
+physio.log_files.cardiac = {'C:\Users\kasperla\Documents\Code\PhysIO\dev\deploy\ECGData_epiRT_phys_0921201215_38_08'};
+physio.log_files.respiration = {'C:\Users\kasperla\Documents\Code\PhysIO\dev\deploy\RespData_epiRT_phys_0921201215_38_08'};
 physio.log_files.sampling_interval = 0.025;
 physio.log_files.relative_start_acquisition = 0;
 physio.log_files.align_scan = 'last';
@@ -54,5 +49,4 @@ physio.verbose.use_tabs = false;
 physio.ons_secs.c_scaling = 1;
 physio.ons_secs.r_scaling = 1;
 
-%% Run physiological recording preprocessing and noise modeling
 physio = tapas_physio_main_create_regressors(physio);

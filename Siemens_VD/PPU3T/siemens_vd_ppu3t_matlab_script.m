@@ -1,14 +1,9 @@
-%% Example script using PhysIO with Matlab only (no SPM needed)
-%  For documentation of the parameters, see also tapas_physio_new (e.g., via edit)
-
-%% Create default parameter structure with all fields
 physio = tapas_physio_new();
 
-%% Individual Parameter settings. Modify to your need and remove default settings
 physio.log_files.vendor = 'Siemens_Tics';
-physio.log_files.cardiac = {'Physio_20180101_120001_pppppppp-hhhh-yyyy-ssss-ioioioioioio_PULS.log'};
-physio.log_files.respiration = {'Physio_20180101_120001_pppppppp-hhhh-yyyy-ssss-ioioioioioio_RESP.log'};
-physio.log_files.scan_timing = {'Physio_20180101_120001_pppppppp-hhhh-yyyy-ssss-ioioioioioio_Info.log'};
+physio.log_files.cardiac = {'C:\Users\kasperla\Documents\Code\PhysIO\dev\deploy\Physio_20180101_120001_pppppppp-hhhh-yyyy-ssss-ioioioioioio_PULS.log'};
+physio.log_files.respiration = {'C:\Users\kasperla\Documents\Code\PhysIO\dev\deploy\Physio_20180101_120001_pppppppp-hhhh-yyyy-ssss-ioioioioioio_RESP.log'};
+physio.log_files.scan_timing = {'C:\Users\kasperla\Documents\Code\PhysIO\dev\deploy\Physio_20180101_120001_pppppppp-hhhh-yyyy-ssss-ioioioioioio_Info.log'};
 physio.log_files.relative_start_acquisition = 0;
 physio.log_files.align_scan = 'last';
 physio.scan_timing.sqpar.Nslices = 48;
@@ -53,5 +48,4 @@ physio.verbose.use_tabs = false;
 physio.ons_secs.c_scaling = 1;
 physio.ons_secs.r_scaling = 1;
 
-%% Run physiological recording preprocessing and noise modeling
 physio = tapas_physio_main_create_regressors(physio);
