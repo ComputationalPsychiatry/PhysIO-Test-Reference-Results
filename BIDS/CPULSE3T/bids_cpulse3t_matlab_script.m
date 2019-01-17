@@ -1,8 +1,13 @@
+%% Example script using PhysIO with Matlab only (no SPM needed)
+%  For documentation of the parameters, see also tapas_physio_new (e.g., via edit tapas_physio_new)
+
+%% Create default parameter structure with all fields
 physio = tapas_physio_new();
 
+%% Individual Parameter settings. Modify to your need and remove default settings
 physio.save_dir = {'physio_test'};
 physio.log_files.vendor = 'BIDS';
-physio.log_files.cardiac = {'C:\Users\kasperla\Documents\Code\PhysIO\dev\deploy\sub-s002_task-fnclearning_run-01_physio.tsv'};
+physio.log_files.cardiac = {'sub-s002_task-fnclearning_run-01_physio.tsv.gz'};
 physio.log_files.align_scan = 'first';
 physio.scan_timing.sqpar.Nslices = 16;
 physio.scan_timing.sqpar.TR = 1.45;
@@ -47,4 +52,5 @@ physio.verbose.use_tabs = false;
 physio.ons_secs.c_scaling = 1;
 physio.ons_secs.r_scaling = 1;
 
+%% Run physiological recording preprocessing and noise modeling
 physio = tapas_physio_main_create_regressors(physio);
