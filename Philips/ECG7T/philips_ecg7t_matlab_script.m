@@ -44,6 +44,7 @@ physio.model.noise_rois.include = false;
 physio.model.noise_rois.thresholds = 0.9;
 physio.model.noise_rois.n_voxel_crop = 0;
 physio.model.noise_rois.n_components = 1;
+physio.model.noise_rois.force_coregister = 1;
 physio.model.movement.include = true;
 physio.model.movement.file_realignment_parameters = {'rp_fMRI.txt'};
 physio.model.movement.order = 6;
