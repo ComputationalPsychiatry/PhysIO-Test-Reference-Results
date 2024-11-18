@@ -4,5 +4,15 @@
   "Columns": [
     "cardiac",
     "respiratory"
-  ]
+  ],
+  "Manufacturer": "Philips",
+  "SoftwareVersions": "BIDS Conversion by TAPAS PhysIO Toolbox",
+  "cardiac": {
+    "Description": "continuous pulse measurement",
+    "Units": "a.u."
+  },
+  "respiratory": {
+    "Description": "continuous amplitude measurements by respiration belt",
+    "Units": "a.u."
+  }
 }
