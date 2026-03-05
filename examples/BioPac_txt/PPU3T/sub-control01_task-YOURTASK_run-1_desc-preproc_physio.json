@@ -1,0 +1,28 @@
+{
+  "StartTime": 0,
+  "SamplingFrequency": 1000,
+  "Columns": [
+    "cardiac",
+    "respiratory",
+    "trigger",
+    "cardiac_pulse"
+  ],
+  "Manufacturer": "Biopac_Txt",
+  "SoftwareVersions": "BIDS Conversion by TAPAS PhysIO Toolbox (R2025a-v9.1.0)",
+  "cardiac": {
+    "Description": "continuous pulse measurement (processed: normalized amplitudes, padded for scan duration, scan trigger extracted, filtered respiratory data)",
+    "Units": "a.u."
+  },
+  "respiratory": {
+    "Description": "continuous amplitude measurements by respiration belt (processed: normalized amplitudes, padded for scan duration, scan trigger extracted, filtered respiratory data)",
+    "Units": "a.u."
+  },
+  "trigger": {
+    "Description": "continuous binary indicator variable of scan volume trigger signal detected by PhysIO",
+    "Units": "a.u."
+  },
+  "cardiac_pulse": {
+    "Description": "continuous binary indicator variable of cardiac pulses (peaks) detected by PhysIO",
+    "Units": "a.u."
+  }
+}
