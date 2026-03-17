@@ -5,11 +5,22 @@ Repository of Test Reference Results for TAPAS PhysIO Toolbox
 
 Please note: If you are not a PhysIO developer or trying to debug PhysIO functionality, this is probably not the repository you are looking for. The example files to try out the toolbox are in the [PhysIO Examples Repository](https://github.com/ComputationalPsychiatry/PhysIO-Examples)
 
-In this repository, you can find all reference results for unit and integration tests for the [TAPAS PhysIO Toolbox](https://github.com/ComputationalPsychiatry/PhysIO). You can download the reference results by cloning this repository as
+In this repository, you can find all reference results for unit and integration tests for the [TAPAS PhysIO Toolbox](https://github.com/ComputationalPsychiatry/PhysIO). 
+
+
+Download
+--------
+
+You can download the reference results by cloning this repository as
 
 ```
 git clone https://github.com/ComputationalPsychiatry/PhysIO-Test-Reference-Results.git PhysIO/test-reference-results 
 ```
+
+Alternatively, you can download these reference results within Matlab running the `tapas_physio_download_test_reference_results` in the `tests` subfolder of the [PhysIO Code Repository](https://github.com/ComputationalPsychiatry/PhysIO).
+
+Overview
+--------
 
 The general folder structure for the PhysIO repositories should be as follows:
 
