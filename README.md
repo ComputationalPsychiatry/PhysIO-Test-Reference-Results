@@ -34,6 +34,6 @@ PhysIO
 
 where:
 
-- `PhysIO` is your PhysIO code repository, code cloned from [GitHub](https://github.com/ComputationalPsychiatry/PhysIO) or release downloaded and unzipped from [Zenodo](https://doi.org/10.5281/zenodo.15578837)
-- `PhysIO/examples` is your PhysIO examples repository, code and data cloned from [GitHub](https://github.com/ComputationalPsychiatry/PhysIO-Examples) or release downloaded and unzipped from [Zenodo](https://zenodo.org/records/15579087)
-- `PhysIO/test-reference-results` is your PhysIO reference results repository, data cloned from [GitHub](https://github.com/ComputationalPsychiatry/PhysIO-Test=Reference-Results) or release downloaded and unzipped from [Zenodo](https://zenodo.org/records/16579519)
+- `PhysIO` is your PhysIO code repository, code cloned from [GitHub](https://github.com/ComputationalPsychiatry/PhysIO) or release downloaded and unzipped from [Zenodo](https://doi.org/10.5281/zenodo.15578836)
+- `PhysIO/examples` is your PhysIO examples repository, code and data cloned from [GitHub](https://github.com/ComputationalPsychiatry/PhysIO-Examples) or release downloaded and unzipped from [Zenodo](https://doi.org/10.5281/zenodo.15579086)
+- `PhysIO/test-reference-results` is your PhysIO reference results repository, data cloned from [GitHub](https://github.com/ComputationalPsychiatry/PhysIO-Test=Reference-Results) or release downloaded and unzipped from [Zenodo](https://doi.org/10.5281/zenodo.16579518)
